@@ -36,17 +36,20 @@ public class GetMethods {
                 http.sendGetTimeline("TimelineId", "123456");
 	}
     
-    public void sendGetAllTimelines() throws Exception {
-        
-        String url = "https://gcu.ideagen-development.com/Timeline/GetTimelines";
-        
+    public HttpURLConnection setAuthToken(String url, String reqType) throws Exception {
         URL query = new URL(url);
         HttpURLConnection con = (HttpURLConnection) query.openConnection();
-        con.setRequestMethod("GET");
+        con.setRequestMethod(reqType);
         con.setRequestProperty("tenantId", tenantId);
         con.setRequestProperty("AuthToken", authToken);
+        return con;
+    }
+    
+    public void sendGetAllTimelines() throws Exception {
+        
+        HttpURLConnection con = setAuthToken("https://gcu.ideagen-development.com/Timeline/GetTimelines", "GET");
         int responseCode = con.getResponseCode();
-        System.out.println("Sending GET request to: " + url);
+        System.out.println("Sending GET request to: https://gcu.ideagen-development.com/Timeline/GetTimelines" );
         System.out.println("Response code: " + responseCode);
         
         BufferedReader in = new BufferedReader(
@@ -62,18 +65,12 @@ public class GetMethods {
         
     }
     
-    public void sendGetTimeline(String timelineIdKey, String timelineIdVal) throws Exception {
+    public void sendGetTimeline(String timeLineIdKey, String timeLineIdVal) throws Exception {
         
-        String url = "https://gcu.ideagen-development.com/Timeline/GetTimeline";
-        
-        URL query = new URL(url);
-        HttpURLConnection con = (HttpURLConnection) query.openConnection();
-        con.setRequestMethod("GET");
-        con.setRequestProperty("tenantId", tenantId);
-        con.setRequestProperty("AuthToken", authToken);
-        con.setRequestProperty(timelineIdKey, timelineIdVal);
+        HttpURLConnection con = setAuthToken("https://gcu.ideagen-development.com/Timeline/GetTimeline", "GET");
+        con.setRequestProperty(timeLineIdKey, timeLineIdVal);
         int responseCode = con.getResponseCode();
-        System.out.println("Sending GET request to: " + url);
+        System.out.println("Sending GET request to: https://gcu.ideagen-development.com/Timeline/GetTimeline");
         System.out.println("Response code: " + responseCode);
         
         BufferedReader in = new BufferedReader(
@@ -86,5 +83,189 @@ public class GetMethods {
 		}
 		in.close();
                 System.out.println(response.toString());
+    }
+    
+    public void sendGetLinkedEvents(String timeLineIdKey, String timeLineIdVal) throws Exception {
+        HttpURLConnection con = setAuthToken("https://gcu.ideagen-development.com/Timeline/GetEvents", "GET");
+        con.setRequestProperty(timeLineIdKey, timeLineIdVal);
+        int responseCode = con.getResponseCode();
+        System.out.println("Sending GET request to: https://gcu.ideagen-development.com/Timeline/GetEvents");
+        System.out.println("Response code: " + responseCode);
+        BufferedReader in = new BufferedReader(
+		        new InputStreamReader(con.getInputStream()));
+		String inputLine;
+		StringBuffer response = new StringBuffer();
+
+		while ((inputLine = in.readLine()) != null) {
+			response.append(inputLine);
+		}
+		in.close();
+                System.out.println(response.toString());
+    }
+    
+    public void sendGetAllEventsAndTimelines() throws Exception {
+        
+        HttpURLConnection con = setAuthToken("https://gcu.ideagen-development.com/Timeline/GetAllTimelinesAndEvent", "GET");
+        int responseCode = con.getResponseCode();
+        System.out.println("Sending GET request to: https://gcu.ideagen-development.com/Timeline/GetAllTimelinesAndEvent" );
+        System.out.println("Response code: " + responseCode);
+        
+        BufferedReader in = new BufferedReader(
+		        new InputStreamReader(con.getInputStream()));
+		String inputLine;
+		StringBuffer response = new StringBuffer();
+
+		while ((inputLine = in.readLine()) != null) {
+			response.append(inputLine);
+		}
+		in.close();
+                System.out.println(response.toString());
+        
+    }
+    
+    public void sendGetLinkedTimelineEvents(String TimelineEventIdKey, String TimelineEventIdVal) throws Exception {
+        
+        HttpURLConnection con = setAuthToken("https://gcu.ideagen-development.com/TimelineEvent/GetLinkedTimelineEvents", "GET");
+        con.setRequestProperty(TimelineEventIdKey, TimelineEventIdVal);
+        int responseCode = con.getResponseCode();
+        System.out.println("Sending GET request to: https://gcu.ideagen-development.com/TimelineEvent/GetLinkedTimelineEvents" );
+        System.out.println("Response code: " + responseCode);
+        
+        BufferedReader in = new BufferedReader(
+		        new InputStreamReader(con.getInputStream()));
+		String inputLine;
+		StringBuffer response = new StringBuffer();
+
+		while ((inputLine = in.readLine()) != null) {
+			response.append(inputLine);
+		}
+		in.close();
+                System.out.println(response.toString());
+        
+    }
+    
+    public void sendGetTimelineEvent(String TimelineEventIdKey, String TimelineEventIdVal) throws Exception {
+        
+        HttpURLConnection con = setAuthToken("https://gcu.ideagen-development.com/TimelineEvent/GetTimelineEvent", "GET");
+        con.setRequestProperty(TimelineEventIdKey, TimelineEventIdVal);
+        int responseCode = con.getResponseCode();
+        System.out.println("Sending GET request to: https://gcu.ideagen-development.com/TimelineEvent/GetTimelineEvent" );
+        System.out.println("Response code: " + responseCode);
+        
+        BufferedReader in = new BufferedReader(
+		        new InputStreamReader(con.getInputStream()));
+		String inputLine;
+		StringBuffer response = new StringBuffer();
+
+		while ((inputLine = in.readLine()) != null) {
+			response.append(inputLine);
+		}
+		in.close();
+                System.out.println(response.toString());
+        
+    }
+    
+    public void sendGetTimelineEvents() throws Exception {
+        
+        HttpURLConnection con = setAuthToken("https://gcu.ideagen-development.com/TimelineEvent/GetAllEvents", "GET");
+        int responseCode = con.getResponseCode();
+        System.out.println("Sending GET request to: https://gcu.ideagen-development.com/TimelineEvent/GetAllEvents" );
+        System.out.println("Response code: " + responseCode);
+        
+        BufferedReader in = new BufferedReader(
+		        new InputStreamReader(con.getInputStream()));
+		String inputLine;
+		StringBuffer response = new StringBuffer();
+
+		while ((inputLine = in.readLine()) != null) {
+			response.append(inputLine);
+		}
+		in.close();
+                System.out.println(response.toString());
+        
+    }
+    
+    public void sendGetUploadURL(String AttachmentIdKey, String AttachmentIdVal) throws Exception {
+        
+        HttpURLConnection con = setAuthToken("https://gcu.ideagen-development.com/TimelineEventAttachment/GenerateUploadPresignedUrl", "GET");
+        con.setRequestProperty(AttachmentIdKey, AttachmentIdVal);
+        int responseCode = con.getResponseCode();
+        System.out.println("Sending GET request to: https://gcu.ideagen-development.com/TimelineEventAttachment/GenerateUploadPresignedUrl" );
+        System.out.println("Response code: " + responseCode);
+        
+        BufferedReader in = new BufferedReader(
+		        new InputStreamReader(con.getInputStream()));
+		String inputLine;
+		StringBuffer response = new StringBuffer();
+
+		while ((inputLine = in.readLine()) != null) {
+			response.append(inputLine);
+		}
+		in.close();
+                System.out.println(response.toString());
+        
+    }
+    
+    public void sendGetDownloadURL(String AttachmentIdKey, String AttachmentIdVal) throws Exception {
+        
+        HttpURLConnection con = setAuthToken("https://gcu.ideagen-development.com/TimelineEventAttachment/GenerateGetPresignedUrl", "GET");
+        con.setRequestProperty(AttachmentIdKey, AttachmentIdVal);
+        int responseCode = con.getResponseCode();
+        System.out.println("Sending GET request to: https://gcu.ideagen-development.com/TimelineEventAttachment/GenerateGetPresignedUrl" );
+        System.out.println("Response code: " + responseCode);
+        
+        BufferedReader in = new BufferedReader(
+		        new InputStreamReader(con.getInputStream()));
+		String inputLine;
+		StringBuffer response = new StringBuffer();
+
+		while ((inputLine = in.readLine()) != null) {
+			response.append(inputLine);
+		}
+		in.close();
+                System.out.println(response.toString());
+        
+    }
+    
+    public void sendGetEventAttachment(String AttachmentIdKey, String AttachmentIdVal) throws Exception {
+        
+        HttpURLConnection con = setAuthToken("https://gcu.ideagen-development.com/TimelineEventAttachment/GetAttachment", "GET");
+        con.setRequestProperty(AttachmentIdKey, AttachmentIdVal);
+        int responseCode = con.getResponseCode();
+        System.out.println("Sending GET request to: https://gcu.ideagen-development.com/TimelineEventAttachment/GenerateGetAttachment" );
+        System.out.println("Response code: " + responseCode);
+        
+        BufferedReader in = new BufferedReader(
+		        new InputStreamReader(con.getInputStream()));
+		String inputLine;
+		StringBuffer response = new StringBuffer();
+
+		while ((inputLine = in.readLine()) != null) {
+			response.append(inputLine);
+		}
+		in.close();
+                System.out.println(response.toString());
+        
+    }
+    
+    public void sendGetAllAttachments(String TimelineEventIdKey, String TimelineEventIdVal) throws Exception {
+        
+        HttpURLConnection con = setAuthToken("https://gcu.ideagen-development.com/TimelineEventAttachment/GetAttachments", "GET");
+        con.setRequestProperty(TimelineEventIdKey, TimelineEventIdVal);
+        int responseCode = con.getResponseCode();
+        System.out.println("Sending GET request to: https://gcu.ideagen-development.com/TimelineEventAttachment/GetAttachments" );
+        System.out.println("Response code: " + responseCode);
+        
+        BufferedReader in = new BufferedReader(
+		        new InputStreamReader(con.getInputStream()));
+		String inputLine;
+		StringBuffer response = new StringBuffer();
+
+		while ((inputLine = in.readLine()) != null) {
+			response.append(inputLine);
+		}
+		in.close();
+                System.out.println(response.toString());
+        
     }
 }
